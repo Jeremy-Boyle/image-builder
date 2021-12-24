@@ -20,11 +20,11 @@ make deps-azure
 
 ### Building Managed Images in Shared Image Galleries
 
-From the `images/capi` directory, run `make build-azure-sig-ubuntu-1804`
+From the `images/capi` directory, run `make build-azure-sig-ubuntu-1804`, for DOD image run `make build-azure-sig-ubuntu-1804-dod`
 
 ### Building VHDs
 
-From the `images/capi` directory, run `make build-azure-vhd-ubuntu-1804`
+From the `images/capi` directory, run `make build-azure-vhd-ubuntu-1804`, for DOD image run `make build-azure-vhd-ubuntu-1804-dod`
 
 > If building the windows images from a Mac there is a known issue with connectivity. Please see details on running [MacOS with ansible](../windows/windows.md#macos-with-ansible).
 
@@ -38,6 +38,13 @@ make build-azure-sig-ubuntu-1804
 
 # Generation 2 image
 make build-azure-sig-ubuntu-1804-gen2
+
+## DOD, DISA, STIG Images
+# Generation 1 image
+make build-azure-sig-ubuntu-1804-dod
+
+# Generation 2 image
+make build-azure-sig-ubuntu-1804-dod-gen2
 ```
 
 Generation 2 images may only be used with Shared Image Gallery, not VHD.
@@ -63,7 +70,7 @@ If you are adding features to image builder than it is sometimes useful to work 
 
 ### Provision a VM directly from a VHD
 
-After creating a VHD, create a managed image using the url output from `make build-azure-vhd-<image>` and use it to [create the VM](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/build-image-with-packer#create-a-vm-from-the-packer-image): 
+After creating a VHD, create a managed image using the url output from `make build-azure-vhd-<image>` and use it to [create the VM](https://docs.microsoft.com/en-us/azure/virtual-machines/windows/build-image-with-packer#create-a-vm-from-the-packer-image):
 
 ```bash
 az image create -n testvmimage -g cluster-api-images --os-type <Windows/Linux> --source <storage url for vhd file>

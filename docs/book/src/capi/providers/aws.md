@@ -43,6 +43,7 @@ the different operating systems.
 | `amazon-2.json` | The settings for the Amazon 2 Linux image |
 | `centos-7.json` | The settings for the CentOS 7 image |
 | `ubuntu-1804.json` | The settings for the Ubuntu 18.04 image |
+| `ubuntu-1804-dod.json` | The settings for the Ubuntu 18.04 image, DOD, DISA STIG compliant (Ver 2, Rel 5) |
 
 #### Common AWS options
 
