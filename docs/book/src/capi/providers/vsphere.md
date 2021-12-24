@@ -84,6 +84,7 @@ In addition to the configuration found in `images/capi/packer/config`, the `ova`
 | `photon-3.json`    | The settings for the Photon 3 image                            |
 | `rhel-7.json`      | The settings for the RHEL 7 image                              |
 | `ubuntu-1804.json` | The settings for the Ubuntu 18.04 image                        |
+| `ubuntu-1804-dod.json` | The settings for the Ubuntu 18.04 image, DOD, DISA STIG compliant (Ver 2, Rel 5) |
 | `ubuntu-2004.json` | The settings for the Ubuntu 20.04 image                        |
 | `vsphere.json`     | Additional settings needed when building on a remote vSphere   |
 
