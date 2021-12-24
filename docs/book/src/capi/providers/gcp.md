@@ -36,6 +36,12 @@ For instance, to build an image for `ubuntu 18-04`, run
 $ make build-gce-ubuntu-1804
 ```
 
+To build the dod ubuntu image, run
+
+```bash
+make build-gce-ubuntu-1804-dod
+```
+
 To build all gce ubuntu images, run
 
 ```bash
@@ -49,6 +55,7 @@ The `gce` sub-directory inside `images/capi/packer` stores JSON configuration fi
 | File | Description
 | -------- | --------
 | `ubuntu-1804.json`     | Settings for Ubuntu 18-04 image     |
+| `ubuntu-1804-dod.json`     | Settings for Ubuntu 18-04 image, DOD, DISA STIG compliant (Ver 2, Rel 5) |
 | `ubuntu-2004.json`     | Settings for Ubuntu 20-04 image     |
 
 ### List Images
