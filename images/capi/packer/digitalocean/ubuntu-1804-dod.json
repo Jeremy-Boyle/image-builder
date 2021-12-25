@@ -1,4 +1,5 @@
 {
+  "ansible_extra_vars": "custom_role=true custom_role_names=dod/ubuntu1804STIG",
   "build_name": "ubuntu-1804-dod",
   "snapshot_name_suffix": "on Ubuntu 18.04",
   "source_image": "ubuntu-18-04-x64"
