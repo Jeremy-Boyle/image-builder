@@ -1,5 +1,5 @@
 {
-  "ansible_extra_vars": "custom_role=true custom_role_names=dod/ubuntu1804STIG",
+  "ansible_extra_vars": "distribution=Ubuntu custom_role=true custom_role_names=dod/ubuntu1804STIG",
   "ami_filter_name": "ubuntu/images/*ubuntu-bionic-18.04-amd64-server-*",
   "ami_filter_owners": "099720109477",
   "build_name": "ubuntu-18.04-dod",
