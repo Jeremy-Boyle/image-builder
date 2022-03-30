@@ -258,15 +258,8 @@ NODE_OVA_VSPHERE_CLONE_BUILD_NAMES		:=	$(addprefix node-ova-vsphere-clone-,$(PLA
 HAPROXY_OVA_LOCAL_BUILD_NAMES			:=	$(addprefix haproxy-ova-local-,$(PHOTON_VERSIONS))
 HAPROXY_OVA_VSPHERE_BUILD_NAMES		:=	$(addprefix haproxy-ova-vsphere-,$(PHOTON_VERSIONS))
 
-<<<<<<< HEAD
-AMI_BUILD_NAMES			   ?= ami-centos-7 ami-ubuntu-1804 ami-ubuntu-1804-dod ami-ubuntu-2004 ami-amazon-2 ami-flatcar ami-windows-2019 ami-windows-2004
+AMI_BUILD_NAMES			   ?= ami-centos-7 ami-ubuntu-1804 ami-ubuntu-1804-dod ami-ubuntu-2004 ami-amazon-2 ami-flatcar ami-windows-2019 ami-windows-2004 ami-rockylinux-8
 GCE_BUILD_NAMES			   ?= gce-ubuntu-1804 gce-ubuntu-1804-dod gce-ubuntu-2004
-AZURE_BUILD_VHD_NAMES	   ?= azure-vhd-ubuntu-1804 azure-vhd-ubuntu-1804-dod azure-vhd-ubuntu-2004 azure-vhd-centos-7 azure-vhd-windows-2019 azure-vhd-windows-2019-containerd azure-vhd-windows-2022-containerd
-AZURE_BUILD_SIG_NAMES	   ?= azure-sig-ubuntu-1804 azure-vhd-ubuntu-1804-dod azure-sig-ubuntu-2004 azure-sig-centos-7 azure-sig-windows-2019 azure-sig-windows-2019-containerd azure-sig-flatcar azure-sig-windows-2022-containerd
-AZURE_BUILD_SIG_GEN2_NAMES ?= azure-sig-ubuntu-1804-gen2 azure-vhd-ubuntu-1804-dod-gen2 azure-sig-ubuntu-2004-gen2 azure-sig-centos-7-gen2
-=======
-AMI_BUILD_NAMES			   ?= ami-centos-7 ami-ubuntu-1804 ami-ubuntu-2004 ami-amazon-2 ami-flatcar ami-windows-2019 ami-windows-2004 ami-rockylinux-8
-GCE_BUILD_NAMES			   ?= gce-ubuntu-1804 gce-ubuntu-2004
 
 # Make needs these lists to be space delimited, no quotes
 VHD_TARGETS := $(shell grep VHD_TARGETS azure_targets.sh | sed 's/VHD_TARGETS=//' | tr -d \")
@@ -276,15 +269,15 @@ AZURE_BUILD_VHD_NAMES	   ?= $(addprefix azure-vhd-,$(VHD_TARGETS))
 AZURE_BUILD_SIG_NAMES	   ?= $(addprefix azure-sig-,$(SIG_TARGETS))
 AZURE_BUILD_SIG_GEN2_NAMES ?= $(addsuffix -gen2,$(addprefix azure-sig-,$(SIG_GEN2_TARGETS)))
 
->>>>>>> master
-OCI_BUILD_NAMES			   ?= oci-ubuntu-1804 oci-ubuntu-2004 oci-oracle-linux-8
+OCI_BUILD_NAMES			   ?= oci-ubuntu-1804 oci-ubuntu-1804-dod oci-ubuntu-2004 oci-oracle-linux-8
 
-DO_BUILD_NAMES 			?=	do-centos-7 do-ubuntu-1804 do-ubuntu-2004
+DO_BUILD_NAMES 			?=	do-centos-7 do-ubuntu-1804 do-ubuntu-1804-dod do-ubuntu-2004
 
 QEMU_FLATCAR_BUILD_NAMES	?=	qemu-flatcar
 QEMU_BUILD_NAMES			?=	qemu-ubuntu-1804 qemu-ubuntu-1804-dod qemu-ubuntu-2004 qemu-centos-7 qemu-ubuntu-2004-efi qemu-rhel-8 qemu-rockylinux-8
 
-RAW_BUILD_NAMES                        ?=      raw-ubuntu-1804 raw-ubuntu-1804-dod raw-ubuntu-2004 raw-ubuntu-2004-efi
+RAW_BUILD_NAMES             ?=  raw-ubuntu-1804 raw-ubuntu-1804-dod raw-ubuntu-2004 raw-ubuntu-2004-efi
+VBOX_BUILD_NAMES			?=  vbox-windows-2019
 
 ## --------------------------------------
 ## Dynamic build targets
@@ -531,7 +524,7 @@ build-do-centos-7: ## Builds Centos 7 DigitalOcean Snapshot
 build-do-all: $(DO_BUILD_TARGETS) ## Builds all DigitalOcean Snapshot
 
 build-gce-ubuntu-1804: ## Builds the GCE ubuntu-1804 image
-build-gce-ubuntu-1804: ## Builds the GCE ubuntu-1804 image, DOD, DISA STIG compliant (Ver 2, Rel 5)
+build-gce-ubuntu-1804-dod: ## Builds the GCE ubuntu-1804 image, DOD, DISA STIG compliant (Ver 2, Rel 5)
 build-gce-ubuntu-2004: ## Builds the GCE ubuntu-2004 image
 build-gce-all: $(GCE_BUILD_TARGETS) ## Builds all GCE image
 
@@ -629,7 +622,7 @@ validate-ami-centos-7: ## Validates CentOS 7 AMI Packer config
 validate-ami-rockylinux-8: ## Validates RockyLinux 8 AMI Packer config
 validate-ami-flatcar: ## Validates Flatcar AMI Packer config
 validate-ami-ubuntu-1804: ## Validates Ubuntu 18.04 AMI Packer config
-validate-ami-ubuntu-1804-dod: ## Validates Ubuntu 18.04 AMI Packer config
+validate-ami-ubuntu-1804-dod: ## Validates Ubuntu 18.04 DOD AMI Packer config
 validate-ami-ubuntu-2004: ## Validates Ubuntu 20.04 AMI Packer config
 validate-ami-windows-2019: ## Validates Windows Server 2019 AMI Packer config
 validate-ami-windows-2004: ## Validates Windows Server 2004 SAC AMI Packer config
@@ -657,23 +650,23 @@ validate-azure-sig-ubuntu-1804-dod-gen2: ## Validates Ubuntu 18.04 Azure managed
 validate-azure-sig-ubuntu-2004-gen2: ## Validates Ubuntu 20.04 Azure managed image in Shared Image Gallery Packer config
 validate-azure-all: $(AZURE_VALIDATE_SIG_TARGETS) $(AZURE_VALIDATE_VHD_TARGETS) $(AZURE_VALIDATE_SIG_GEN2_TARGETS) ## Validates all images for Azure Packer config
 
-validate-do-ubuntu-1804: ## Valdiates Ubuntu 18.04 DigitalOcean Snapshot Packer config
-validate-do-ubuntu-1804-dod: ## Valdiates Ubuntu 18.04 DigitalOcean Snapshot Packer config
-validate-do-ubuntu-2004: ## Valdiates Ubuntu 20.04 DigitalOcean Snapshot Packer config
-validate-do-centos-7: ## Valdiates Centos 7 DigitalOcean Snapshot Packer config
-validate-do-all: $(DO_VALIDATE_TARGETS) ## Valdiates all DigitalOcean Snapshot Packer config
+validate-do-ubuntu-1804: ## Validates Ubuntu 18.04 DigitalOcean Snapshot Packer config
+validate-do-ubuntu-1804-dod: ## Validates Ubuntu 18.04 DOD DigitalOcean Snapshot Packer config
+validate-do-ubuntu-2004: ## Validates Ubuntu 20.04 DigitalOcean Snapshot Packer config
+validate-do-centos-7: ## Validates Centos 7 DigitalOcean Snapshot Packer config
+validate-do-all: $(DO_VALIDATE_TARGETS) ## Validates all DigitalOcean Snapshot Packer config
 
-validate-gce-ubuntu-1804: ## Valdiates Ubuntu 18.04 GCE Snapshot Packer config
-validate-gce-ubuntu-1804-dod: ## Valdiates Ubuntu 18.04 GCE Snapshot Packer config
-validate-gce-ubuntu-2004: ## Valdiates Ubuntu 20.04 GCE Snapshot Packer config
-validate-gce-all: $(GCE_VALIDATE_TARGETS) ## Valdiates all GCE Snapshot Packer config
+validate-gce-ubuntu-1804: ## Validates Ubuntu 18.04 GCE Snapshot Packer config
+validate-gce-ubuntu-1804-dod: ## Validates Ubuntu 18.04 DOD GCE Snapshot Packer config
+validate-gce-ubuntu-2004: ## Validates Ubuntu 20.04 GCE Snapshot Packer config
+validate-gce-all: $(GCE_VALIDATE_TARGETS) ## Validates all GCE Snapshot Packer config
 
 validate-node-ova-local-centos-7: ## Validates CentOS 7 Node OVA Packer config w local hypervisor
 validate-node-ova-local-photon-3: ## Validates Photon 3 Node OVA Packer config w local hypervisor
 validate-node-ova-local-rhel-7: ## Validates RHEL 7 Node OVA Packer config w local hypervisor
 validate-node-ova-local-rockylinux-8: ## Validates RockyLinux 8 Node OVA Packer config w local hypervisor
 validate-node-ova-local-ubuntu-1804: ## Validates Ubuntu 18.04 Node OVA Packer config w local hypervisor
-validate-node-ova-local-ubuntu-1804-dod: ## Validates Ubuntu 18.04 Node OVA Packer config w local hypervisor
+validate-node-ova-local-ubuntu-1804-dod: ## Validates Ubuntu 18.04 DOD Node OVA Packer config w local hypervisor
 validate-node-ova-local-ubuntu-2004: ## Validates Ubuntu 20.04 Node OVA Packer config w local hypervisor
 validate-node-ova-local-windows-2019: ## Validates Windows Server 2019 Node OVA Packer config w local hypervisor
 validate-node-ova-local-windows-2004: ## Validates Windows Server 2004 SAC Node OVA Packer config w local hypervisor
@@ -686,7 +679,7 @@ validate-node-ova-local-vmx-centos-7: ## Validates Centos 7 Node OVA from VMX fi
 validate-node-ova-local-vmx-rhel-7: ## Validates RHEL 7 Node OVA from VMX file w local hypervisor
 validate-node-ova-local-vmx-rockylinux-8: ## Validates RockyLinux 8 Node OVA from VMX file w local hypervisor
 validate-node-ova-local-vmx-ubuntu-1804: ## Validates Ubuntu 18.04 Node OVA from VMX file w local hypervisor
-validate-node-ova-local-vmx-ubuntu-1804-dod: ## Validates Ubuntu 18.04 Node OVA from VMX file w local hypervisor
+validate-node-ova-local-vmx-ubuntu-1804-dod: ## Validates Ubuntu 18.04 DOD Node OVA from VMX file w local hypervisor
 validate-node-ova-local-vmx-ubuntu-2004: ## Validates Ubuntu 20.04 Node OVA from VMX file w local hypervisor
 
 validate-node-ova-local-base-photon-3: ## Validates Photon 3 Base Node OVA w local hypervisor
@@ -694,7 +687,7 @@ validate-node-ova-local-base-centos-7: ## Validates Centos 7 Base Node OVA w loc
 validate-node-ova-local-base-rhel-7: ## Validates RHEL 7 Base Node OVA w local hypervisor
 validate-node-ova-local-base-rockylinux-8: ## Validates RockyLinux 8 Base Node OVA w local hypervisor
 validate-node-ova-local-base-ubuntu-1804: ## Validates Ubuntu 18.04 Base Node OVA w local hypervisor
-validate-node-ova-local-base-ubuntu-1804-dod: ## Validates Ubuntu 18.04 Base Node OVA w local hypervisor
+validate-node-ova-local-base-ubuntu-1804-dod: ## Validates Ubuntu 18.04 DOD Base Node OVA w local hypervisor
 validate-node-ova-local-base-ubuntu-2004: ## Validates Ubuntu 20.04 Base Node OVA w local hypervisor
 
 validate-qemu-flatcar: ## Validates Flatcar QEMU image packer config
@@ -708,12 +701,13 @@ validate-qemu-rockylinux-8: ## Validates Rocky Linux 8 QEMU image packer config
 validate-qemu-all: $(QEMU_VALIDATE_TARGETS) validate-qemu-flatcar ## Validates all Qemu Packer config
 
 validate-raw-ubuntu-1804: ## Validates Ubuntu 18.04 RAW image packer config
-validate-raw-ubuntu-1804-dod: ## Validates Ubuntu 18.04 RAW image packer config
+validate-raw-ubuntu-1804-dod: ## Validates Ubuntu 18.04 DOD RAW image packer config
 validate-raw-ubuntu-2004: ## Validates Ubuntu 20.04 RAW image packer config
 validate-raw-ubuntu-2004-efi: ## Validates Ubuntu 20.04 RAW EFI image packer config
 validate-raw-all: $(RAW_VALIDATE_TARGETS) ## Validates all RAW Packer config
 
 validate-oci-ubuntu-1804: ## Validates the OCI ubuntu-1804 image packer config
+validate-oci-ubuntu-1804-dod: ## Validates the OCI ubuntu-1804 DOD image packer config
 validate-oci-ubuntu-2004: ## Validates the OCI ubuntu-2004 image packer config
 validate-oci-oracle-linux-8: ## Validates the OCI Oracle Linux 8.x image packer config
 validate-oci-all: $(OCI_VALIDATE_TARGETS) ## Validates all OCI image packer config
