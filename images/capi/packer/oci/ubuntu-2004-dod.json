@@ -1,0 +1,7 @@
+{
+  "ansible_extra_vars": "custom_role=true custom_role_names=dod/ubuntu2004STIG",
+  "build_name": "ubuntu-2004-dod",
+  "operating_system": "Canonical Ubuntu",
+  "operating_system_version": "20.04",
+  "ssh_username": "ubuntu"
+}

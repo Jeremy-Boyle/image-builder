@@ -138,7 +138,7 @@
     }
   ],
   "variables": {
-    "accelerator": "kvm",
+    "accelerator": "hvf",
     "ansible_common_vars": "",
     "ansible_extra_vars": "ansible_python_interpreter=/usr/bin/python3",
     "boot_wait": "10s",

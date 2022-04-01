@@ -1,0 +1,10 @@
+{
+  "ansible_extra_vars": "custom_role=true custom_role_names=dod/ubuntu2004STIG",
+  "build_name": "ubuntu-2004-dod-gen2",
+  "distribution": "ubuntu",
+  "distribution_release": "focal",
+  "distribution_version": "2004",
+  "image_offer": "0001-com-ubuntu-server-focal",
+  "image_publisher": "Canonical",
+  "image_sku": "20_04-lts-gen2"
+}

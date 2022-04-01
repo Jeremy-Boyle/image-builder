@@ -1,0 +1,40 @@
+# Ubuntu 2004 Automation for DISA STIG
+
+- name: Install tools needed for Ubuntu Advantage
+  apt:
+    pkg:
+    - ubuntu-advantage-tools
+- name: Attach instance to Ubuntu Advantage
+  command: >
+    ua attach
+- name: Ubuntu Advantage enable Ubuntu Security
+  command: >
+    ua enable usg --assume-yes
+- name: Perform a dist-upgrade
+  apt:
+    force_apt_get: True
+    update_cache: True
+    upgrade: dist
+- name: Enable FIPS
+  command: >
+    ua enable fips-updates --assume-yes
+- name: Install USG for Ubuntu Advantage
+  apt:
+    pkg:
+    - usg
+- name: Create xml config file
+  copy:
+    src: config.xml
+    dest: /tmp/config.xml
+    owner: root
+    group: root
+    mode: 0644
+  when: ansible_os_family != "Flatcar"
+- name: Run automation for DISA Stig, and detach instance from Ubuntu Advantage
+  become: true
+  become_user: root
+  shell: |
+    usg fix --tailoring-file /tmp/config.xml
+    rm -rf /var/log/ubuntu-advantage.log
+    rm /tmp/config.xml
+    ua detach --assume-yes

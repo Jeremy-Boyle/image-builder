@@ -1,0 +1,7 @@
+{
+  "ansible_extra_vars": "custom_role=true custom_role_names=dod/ubuntu2004STIG",
+  "build_name": "ubuntu-2004-dod",
+  "distribution_release": "focal",
+  "distribution_version": "2004",
+  "zone": "us-central1-a"
+}

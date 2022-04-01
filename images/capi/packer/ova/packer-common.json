@@ -1,5 +1,5 @@
 {
-  "boot_wait": "10s",
+  "boot_wait": "30s",
   "convert_to_template": "false",
   "cpu": "4",
   "cpu_cores": "1",
