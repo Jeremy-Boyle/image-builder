@@ -1,0 +1,3 @@
+# Ubuntu 2004 Automation for DISA STIG
+
+- include_tasks: ubuntu-2004-dod.yml

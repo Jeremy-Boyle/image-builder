@@ -26,7 +26,7 @@ TARGETS=("ubuntu-1804" "ubuntu-2004" "photon-3" "centos-7")
 
 on_exit() {
   # kill the VPN
-  docker kill vpn
+  docker kill vpnxw
 }
 
 cleanup_build_vm() {
